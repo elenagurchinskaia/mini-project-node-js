@@ -30,3 +30,21 @@ const questions = [
     name: "gitHub",
   },
 ];
+function init () {
+  inquirer
+  .prompt(questions)
+  .then((data) => {
+    console.log(data)
+    const markdown = templateLiteral(data)
+
+    writeToFile (markdown)
+  })
+}
+function writeToFile (file)
+fs.writeFile("index.html", file, (err) => {
+  err ? console.log(err) : console.log("Success")
+})
+
+function templateLiteral(response) {
+  `Hello, ${response.name}`
+}
